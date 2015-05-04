@@ -1,0 +1,68 @@
+* {
+  box-sizing: border-box;
+}
+
+@mixin clearfix {
+  &:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+}
+
+body {
+  background-color: rgb(212, 106, 106);
+  margin: 0 auto;
+  padding: 0;
+  cursor: default;
+}
+
+/* This parent can be any width and height */
+.block {
+  text-align: center;
+  height: 100vh;
+  /* May want to do this if there is risk the container may be narrower than the element inside */
+  white-space: nowrap;
+}
+
+/* The ghost, nudged to maintain perfect centering */
+.block:before {
+  content: '';
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle;
+  margin-right: -0.25em; /* Adjusts for spacing */
+}
+
+/* The element to be centered, can also be of any width and height */
+.centered {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.main {
+  color: rgb(102, 153, 153);
+  min-width: 100%;
+  font-family: 'Homenaje', sans-serif;
+  max-height: 100vh;
+  font-size: 7em;
+  -webkit-text-stroke-width: 5px;
+  -webkit-text-stroke-color: antiquewhite;
+}
+
+#train{
+  color: rgb(102, 153, 153);
+}
+#stop{
+  color: rgb(102, 153, 153);
+}
+#minutes{
+  color: rgb(102, 153, 153);
+}
+
+::selection {
+  color: rgb(212, 106, 106);
+}
+
+@import 'directives/main';
+@import url(http://fonts.googleapis.com/css?family=Homenaje);
