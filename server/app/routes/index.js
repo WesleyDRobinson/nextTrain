@@ -2,6 +2,8 @@
 var router = require('express').Router();
 var GtfsRealtimeBindings = require('gtfs-realtime-bindings');
 var request = require('request');
+var path = require('path');
+
 // TODO - For production
 //“app.getValueprocess.env.TWILIO_ACCOUNT_SID” and “process.env.TWILIO_AUTH_TOKEN”
 //var accountSid = '<>';
@@ -17,7 +19,6 @@ router.get('/next/:train/:stop', function (req, res, next) {
 
     //TODO figure out how to keep this key off git.
     var API_KEY = require(path.join(__dirname, '../../env')).MTA_DEV_KEY;
-
     var requestSettings = {
         method  : 'GET',
         url     : 'http://datamine.mta.info/mta_esi.php?key=' + API_KEY + '&feed_id=' + userTrain,
