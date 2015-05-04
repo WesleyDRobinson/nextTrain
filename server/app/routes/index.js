@@ -5,11 +5,10 @@ var request = require('request');
 var path = require('path');
 
 // TODO - For production
-//“app.getValueprocess.env.TWILIO_ACCOUNT_SID” and “process.env.TWILIO_AUTH_TOKEN”
-//var accountSid = '<>';
-//var authToken = '<>';
-//var twilio = require('twilio');
-//var client = twilio(accountSid, authToken);
+var accountSid = require(path.join(__dirname, '../../env')).ACCOUNT_SID;
+var authToken = require(path.join(__dirname, '../../env')).AUTH_TOKEN;
+var twilio = require('twilio');
+var client = twilio(accountSid, authToken);
 
 module.exports = router;
 
