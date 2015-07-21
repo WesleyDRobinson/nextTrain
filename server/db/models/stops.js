@@ -15,5 +15,3 @@ var Stops = new mongoose.Schema({
 });
 
 mongoose.model('Stops', Stops);
-
-//mongoimport --db nextTrain --collection stops --type csv --headerline --file stops.csv

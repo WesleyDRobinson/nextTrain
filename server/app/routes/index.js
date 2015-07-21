@@ -3,38 +3,35 @@ var router = require('express').Router();
 var GtfsRealtimeBindings = require('gtfs-realtime-bindings');
 var request = require('request');
 var path = require('path');
-
-// TODO - For production
 var accountSid = require(path.join(__dirname, '../../env')).ACCOUNT_SID;
 var authToken = require(path.join(__dirname, '../../env')).AUTH_TOKEN;
 var twilio = require('twilio');
 var client = twilio(accountSid, authToken);
+var API_KEY = require(path.join(__dirname, '../../env')).MTA_DEV_KEY;
+var requestSettings = {
+    method: 'GET',
+    url: 'http://datamine.mta.info/mta_esi.php?key=' + API_KEY + '&feed_id=' + userTrain,
+    encoding: null
+};
 
 module.exports = router;
 
 router.get('/next/:train/:stop', function (req, res, next) {
     var userStop = req.params.stop;
+    // MTA codes:
+    // L train === 2
+    // 1, 2, 3, 4, 5, 6, S Lines === 1
+    //Staten Island Rail = 11;
     var userTrain = req.params.train === 'L' ? 2 : 1;
 
-    //TODO figure out how to keep this key off git.
-    var API_KEY = require(path.join(__dirname, '../../env')).MTA_DEV_KEY;
-    var requestSettings = {
-        method  : 'GET',
-        url     : 'http://datamine.mta.info/mta_esi.php?key=' + API_KEY + '&feed_id=' + userTrain,
-        encoding: null
-    };
-
-    function getMinutesUntilDeparture (feed) {
-        //console.log(feed.entity);
-        //All train stops for L line (in the future, this could be info for 123345S lines)
-
+    function getMinutesUntilDeparture(feed) {
         var allDepartureTimes = [];
 
         // Fills array 'allDepartureTimes' with Epoch time of next departure
         // using the train defined by trainToGet
         // and the stop defined by stopToGet
         // then finds the minimum from this array
-        function getAllScheduledDepartureTimes (entity) {
+        function getAllScheduledDepartureTimes(entity) {
             var update = entity.trip_update;
             if (update) {
                 var stopTimesArray = update.stop_time_update;
@@ -45,6 +42,7 @@ router.get('/next/:train/:stop', function (req, res, next) {
                 });
             }
         }
+
         feed.entity.forEach(getAllScheduledDepartureTimes);
 
         // The smallest number in allDepartures
@@ -64,11 +62,10 @@ router.get('/next/:train/:stop', function (req, res, next) {
             var sendData = getMinutesUntilDeparture(feed);
             res.json(sendData);
         }
-
     });
 });
 
-//Twilio wiring???
+//TODO: Integrate Twilio
 
 //router.get('/sendText', function (req, res, next) {
 //    console.log(req);

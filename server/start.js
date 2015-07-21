@@ -1,4 +1,4 @@
-/*
+w/*
 
  ES6 by default! Using http://babeljs.io
 

@@ -9,6 +9,7 @@ app.config(function ($stateProvider) {
 
 app.controller("HomeController", function ($scope, $http) {
     var userStop = 'L14S';
+    // MTA codes:
     // L train === 2
     // 1, 2, 3, 4, 5, 6, S Lines === 1
     //Staten Island Rail = 11;
