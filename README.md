@@ -5,7 +5,7 @@ The logic is accomplished here: https://github.com/WesleyDRobinson/nextTrain/blo
 
 <img src="http://i.imgur.com/WNoW4Yc.png"></img>
 
-Created for a 2 day "hackathon" at Fullstack, it prompted and took the award of "Most Solopsistic"
+Created for a 2 day hackathon at Fullstack, it prompted and took the award of "Most Solopsistic"
 
 This page does one thing.
 It tells you when the next Manhattan bound L train will depart from Morgan Ave. 
